@@ -166,6 +166,9 @@ AppDelegateCoreData *appDelegateCoreData = nil;
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
+//Import JSONKit.h
+
+/*
 - (NSManagedObject *)managedObjectFromStructure:(NSDictionary *)structureDictionary
                        withManagedObjectContext:(NSManagedObjectContext *)moc
 {
@@ -202,5 +205,6 @@ AppDelegateCoreData *appDelegateCoreData = nil;
     NSAssert2(error == nil, @"Failed to deserialize\n%@\n%@", [error localizedDescription], json);
     return [self managedObjectFromStructure:structureDictionary withManagedObjectContext:moc];
 }
+*/
 
 @end

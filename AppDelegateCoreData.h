@@ -36,9 +36,11 @@
 //Insert new entry in database
 - (id)insertObjectForEntity:(NSString *)entityName;
 
-//Extra
+//To use this functions add JSONKit from here https://github.com/johnezang/JSONKit
+/*
 - (NSString *)jsonStructureFromManagedObjects:(NSArray*)managedObjects;
 - (NSArray *)managedObjectsFromJSONStructure:(NSString*)json withManagedObjectContext:(NSManagedObjectContext*)moc;
+*/
 
 //Call this in application:didFinishLaunchingWithOptions:
 
