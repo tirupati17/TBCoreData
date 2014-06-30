@@ -11,7 +11,7 @@ Git submodule
 
 - Add the AppDelegateCoreData code into your project.
 - If your project doesn't use ARC, add the -fobjc-arc compiler flag to AppDelegateCoreData.m in your target's Build Phases » Compile    Sources section.
-- Add the <CoreData/CoreData.h> frameworks to your project.
+- Add the <CoreData/CoreData.h> frameworks into your project.
 
 Configuration
 -------------------
