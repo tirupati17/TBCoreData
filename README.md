@@ -35,7 +35,7 @@ NSLog(@"%@", userManageObjectArray);
 User *userManageObject = [appDelegateCoreData fetchObjectForEntity:@"User"
                                                              atKey:@"email"
                                                            atValue:@"test@email.com"];
-NSLog(@"%@", userManageObject.email);                                                           
+NSLog(@"%@", userManageObject.sessionKey);                                                           
 ```
 
 
