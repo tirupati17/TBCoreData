@@ -27,7 +27,7 @@ userManageObject.email = @"test@email.com";
 ```
 ####Simple fetch example:####
 ```
-NSArray *userManageObjectArray = [appDelegateCoreData fetchObjectForEntity:@"User"];
+NSArray *userManageObjectArray = [appDelegateCoreData fetchRequestForEntity:@"User"];
 NSLog(@"%@", userManageObjectArray);                                                           
 ```
 ####Fetch example with key-value example:####
