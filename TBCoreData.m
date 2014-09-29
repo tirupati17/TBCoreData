@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 CelerApps. All rights reserved.
 //
 
-#import "AppDelegateCoreData.h"
+#import "TBCoreData.h"
 #import <CoreData/CoreData.h>
 
-@implementation AppDelegateCoreData
+@implementation TBCoreData
 
 @synthesize dataBaseStorageName = _dataBaseStorageName;
 @synthesize dataBaseExtension = _dataBaseExtension;
@@ -19,21 +19,21 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
-AppDelegateCoreData *appDelegateCoreData = nil;
+TBCoreData *appDelegateCoreData = nil;
 
-+ (AppDelegateCoreData *)initalizeAppDelegateCoreData {
++ (TBCoreData *)initializeObject {
     if (appDelegateCoreData)
         return appDelegateCoreData;
 
-    appDelegateCoreData = [[AppDelegateCoreData alloc] initWithStorageName:CORE_DATA_DATABASE_NAME atDatabaseExtension:CORE_DATA_DATABASE_EXTENSION];
+    appDelegateCoreData = [[TBCoreData alloc] initWithStorageName:CORE_DATA_DATABASE_NAME withDatabaseExtension:CORE_DATA_DATABASE_EXTENSION];
 
     return appDelegateCoreData;
 }
 
-- (id)initWithStorageName:(NSString *)dataBaseStorageNameObj atDatabaseExtension:(NSString *)databaseExtensionObj {
+- (id)initWithStorageName:(NSString *)dataBaseStorageNameNSString withDatabaseExtension:(NSString *)databaseExtensionNSString {
     if (self = [super init]) {
-        self.dataBaseStorageName = [[NSString alloc] initWithString:dataBaseStorageNameObj];
-        self.dataBaseExtension = [[NSString alloc] initWithString:databaseExtensionObj];
+        self.dataBaseStorageName = [[NSString alloc] initWithString:dataBaseStorageNameNSString];
+        self.dataBaseExtension = [[NSString alloc] initWithString:databaseExtensionNSString];
     }
     return self;
 }
@@ -77,8 +77,10 @@ AppDelegateCoreData *appDelegateCoreData = nil;
     if (__managedObjectModel != nil) {
         return __managedObjectModel;
     }
-//    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"FailedBankCD" withExtension:@"momd"];
-//    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    /*
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"FailedBankCD" withExtension:@"momd"];
+    __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    */
     NSURL *modelURL = [[NSBundle mainBundle] URLForResource:CORE_DATA_DATABASE_NAME withExtension:@"momd"];
     __managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return __managedObjectModel;
@@ -148,7 +150,7 @@ AppDelegateCoreData *appDelegateCoreData = nil;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:self.managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"%@==%@", key, value];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", key, value];
     [fetchRequest setPredicate:predicate];
 
     [fetchRequest setEntity:entity];
@@ -166,9 +168,6 @@ AppDelegateCoreData *appDelegateCoreData = nil;
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
 }
 
-//Import JSONKit.h
-
-/*
 - (NSManagedObject *)managedObjectFromStructure:(NSDictionary *)structureDictionary
                        withManagedObjectContext:(NSManagedObjectContext *)moc
 {
@@ -198,13 +197,10 @@ AppDelegateCoreData *appDelegateCoreData = nil;
                             withManagedObjectContext:(NSManagedObjectContext *)moc
 {
     NSError *error = nil;
-    JSONDecoder *decode = [JSONDecoder decoder];
-    NSData *jsonData = [json dataUsingEncoding:NSUTF8StringEncoding];
-
-    NSDictionary *structureDictionary = [decode objectWithData:jsonData];
+    
+    NSDictionary *structureDictionary = [NSJSONSerialization JSONObjectWithData:[json dataUsingEncoding:NSUTF8StringEncoding] options:NSJSONReadingAllowFragments error:nil];
     NSAssert2(error == nil, @"Failed to deserialize\n%@\n%@", [error localizedDescription], json);
     return [self managedObjectFromStructure:structureDictionary withManagedObjectContext:moc];
 }
-*/
 
 @end

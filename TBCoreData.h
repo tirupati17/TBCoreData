@@ -11,7 +11,7 @@
 #define CORE_DATA_DATABASE_NAME @"Model"
 #define CORE_DATA_DATABASE_EXTENSION @"sqlite"
 
-@interface AppDelegateCoreData : NSObject
+@interface TBCoreData : NSObject
 
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
@@ -23,7 +23,7 @@
 
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
-- (id)initWithStorageName:(NSString *)dataBaseStorageNameObj atDatabaseExtension:(NSString *)databaseExtensionObj;
+- (id)initWithStorageName:(NSString *)dataBaseStorageNameNSString withDatabaseExtension:(NSString *)databaseExtensionNSString;
 
 //Fetch list of entry from database
 - (id)fetchRequestForEntity:(NSString *)entityName;
@@ -37,15 +37,12 @@
 - (id)insertObjectForEntity:(NSString *)entityName;
 
 //To use this functions add JSONKit from here https://github.com/johnezang/JSONKit
-/*
-- (NSString *)jsonStructureFromManagedObjects:(NSArray*)managedObjects;
+
 - (NSArray *)managedObjectsFromJSONStructure:(NSString*)json withManagedObjectContext:(NSManagedObjectContext*)moc;
-*/
 
-//Call this in application:didFinishLaunchingWithOptions:
++ (TBCoreData *)initializeObject; //Call this in application:didFinishLaunchingWithOptions:
 
-+ (AppDelegateCoreData *)initalizeAppDelegateCoreData;
 
-extern AppDelegateCoreData *appDelegateCoreData;
+extern TBCoreData *appDelegateCoreData;
 
 @end
