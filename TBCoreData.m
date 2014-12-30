@@ -150,7 +150,7 @@ TBCoreData *appDelegateCoreData = nil;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName
                                               inManagedObjectContext:self.managedObjectContext];
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%@ == %@)", key, value];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"(%K == %@)", key, value];
     [fetchRequest setPredicate:predicate];
 
     [fetchRequest setEntity:entity];
